@@ -3,15 +3,12 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 const catRouter = require("./routes/cat-router");
-const cors = require("cors"); // Import the cors package
-
 
 app.use(express.json());
-app.use(cors());
 app.use("/api/v1", catRouter);
 
 const uri =
-  "mongodb+srv://filmon:abraha@catcluster.twra24t.mongodb.net/?retryWrites=true&w=majority&appName=CatCluster";
+  "mongodb+srv://cclUser:superSecurePassword@colorcodedlabs.jnwokit.mongodb.net/specialDemonstrationDatabase?retryWrites=true&w=majority";
 const clientOptions = {
   serverApi: { version: "1", strict: true, deprecationErrors: true },
 };

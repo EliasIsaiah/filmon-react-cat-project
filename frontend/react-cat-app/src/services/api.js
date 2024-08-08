@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:3000/api/v1';
+const API_URL = "/api/v1";
 
 export const getCats = () => axios.get(`${API_URL}/cats`);
 export const getCatById = (id) => axios.get(`${API_URL}/cat/${id}`);

@@ -6,8 +6,9 @@ const catSchema = require("../models/Cat");
 const Cat = mongoose.model("Cat", catSchema);
 
 router.post("/cat", async (req, res) => {
-  const { name, color, age } = req.body;
+  const { image, name, color, age } = req.body;
   const cat = new Cat({
+    image,
     name,
     color,
     age,

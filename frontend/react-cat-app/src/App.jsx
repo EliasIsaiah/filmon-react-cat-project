@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { getCats, createCat, deleteCat } from './services/api';
+import React, { useState, useEffect } from "react";
+import { getCats, createCat, deleteCat } from "./services/api";
+import "./App.css";
 
 function App() {
   const [cats, setCats] = useState([]);
-  const [newCat, setNewCat] = useState({ name: '', color: '', age: '' });
+  const [newCat, setNewCat] = useState({
+    image: "",
+    name: "",
+    color: "",
+    age: "",
+  });
 
   const fetchCats = async () => {
     const response = await getCats();
@@ -14,16 +20,16 @@ function App() {
     fetchCats();
   }, []);
 
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewCat({ ...newCat, [name]: value });
   };
 
   const handleCreateCat = async () => {
+    console.log("newCat", newCat);
     await createCat(newCat);
     fetchCats();
-    setNewCat({ name: '', color: '', age: '' });
+    setNewCat({ image: "", name: "", color: "", age: "" });
   };
 
   const handleDeleteCat = async (id) => {
@@ -35,6 +41,20 @@ function App() {
     <div>
       <h1>Cat App</h1>
       <div>
+        {/* <label for="image">Image</label>
+        <input
+          onChange={handleImageInputChange}
+          type="file"
+          name="image"
+          accept="image/png, image/jpeg"
+        /> */}
+        <input
+          type="text"
+          name="image"
+          placeholder="imageURI"
+          value={newCat.image}
+          onChange={handleInputChange}
+        />
         <input
           type="text"
           name="name"
@@ -61,7 +81,8 @@ function App() {
       <ul>
         {cats.map((cat) => (
           <li key={cat._id}>
-            {cat.name} - {cat.color} - {cat.age}
+            <img className="avatar" src={cat.image} /> - {cat.name} -{" "}
+            {cat.color} - {cat.age}
             <button onClick={() => handleDeleteCat(cat._id)}>Delete</button>
           </li>
         ))}
